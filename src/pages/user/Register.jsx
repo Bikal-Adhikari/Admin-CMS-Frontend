@@ -1,12 +1,14 @@
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/common/customInput/CustomInput";
 import useForm from "../../Hooks/useForm";
+import { createNewAdminAction } from "../../features/users/userAction";
 
 const Register = () => {
   const { form, handleOnChange } = useForm({});
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    form.confirmPassword = undefined;
+    createNewAdminAction(form);
   };
   const inputs = [
     {
