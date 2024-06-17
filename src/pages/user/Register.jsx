@@ -2,13 +2,18 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/common/customInput/CustomInput";
 import useForm from "../../Hooks/useForm";
 import { createNewAdminAction } from "../../features/users/userAction";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const { form, handleOnChange } = useForm({});
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    form.confirmPassword = undefined;
-    createNewAdminAction(form);
+    const { confirmPassword, ...rest } = form;
+    if (confirmPassword !== rest.password) {
+      return toast.error("Password do not match");
+    }
+
+    createNewAdminAction(rest);
   };
   const inputs = [
     {
