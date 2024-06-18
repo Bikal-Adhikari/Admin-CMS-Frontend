@@ -11,3 +11,11 @@ export const postNewUser = (data) => {
   };
   return apiProcessor(obj);
 };
+export const verifyUserLink = (data) => {
+  const obj = {
+    url: userEp + "/user-verification",
+    method: "post",
+    data,
+  };
+  return apiProcessor(obj);
+};
