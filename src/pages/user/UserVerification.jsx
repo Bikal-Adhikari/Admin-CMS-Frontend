@@ -7,21 +7,25 @@ const UserVerification = () => {
   const [searchParams] = useSearchParams();
   const c = searchParams.get("c");
   const e = searchParams.get("e");
-  const shouldCall = useRef(true);
+
   const [resp, setResp] = useState({});
+  const shouldCall = useRef(true);
+
   useEffect(() => {
-    // Call API to verify user
+    //call api to verify the link
     if (shouldCall.current) {
       (async () => {
-        const { data } = await verifyUserLinkAction({ c, e });
+        const data = await verifyUserLinkAction({ c, e });
+
         setResp(data);
       })();
+
       shouldCall.current = false;
     }
-  }, [c, e]);
+  }, [searchParams, c, e]);
 
   return (
-    <div className="d-flex justify-content-center bg-dark align-items-center vh-100">
+    <div className="d-flex justify-content-center bg-dark align-items-center vh-100  ">
       <div
         className="bg-light p-3 rounded text-center"
         style={{ width: "450px" }}
@@ -32,8 +36,8 @@ const UserVerification = () => {
           </Alert>
         ) : (
           <>
-            <Spinner variant="primary" className="fs-1" animation="border" />
-            <div>Please wait while we are verifying your link.....</div>
+            <Spinner variant="primary" className="fs-1" />
+            <div>Please wait while we are veriring your link....</div>
           </>
         )}
       </div>

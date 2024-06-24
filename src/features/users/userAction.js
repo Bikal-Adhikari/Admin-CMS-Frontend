@@ -7,35 +7,44 @@ import {
 } from "./userAxios";
 import { setUser } from "./userSlice";
 
-export const apiProcessWithToast = async (obj, func) => {
+const apiProcessWithToast = async (obj, func) => {
   const pending = func(obj);
   toast.promise(pending, {
     pending: "Please wait...",
   });
-  const response = await pending;
-  toast[response.status](response.message);
-  return response;
+  const respons = await pending;
+  toast[respons.status](respons.message);
+  return respons;
 };
 
 export const createNewAdminAction = async (userData) => {
   apiProcessWithToast(userData, postNewUser);
+  // further stuff
 };
 
 export const verifyUserLinkAction = async (data) => {
   return apiProcessWithToast(data, verifyUserLink);
 };
+
 export const loginAdminAction = (data) => async (dispatch) => {
-  const { status, tokens } = await userLogin(data);
-  if (status === "success") {
-    sessionStorage.setItem("accessJWT", tokens.accessJWT);
-    localStorage.setItem("refreshJWT", tokens.accessJWT);
+  const { status, jwts } = await userLogin(data);
+
+  if (jwts?.accessJWT && jwts?.refreshJWT) {
+    sessionStorage.setItem("accessJWT", jwts.accessJWT);
+    localStorage.setItem("refreshJWT", jwts.refreshJWT);
+
     dispatch(fetchUserProfileAction());
   }
+
+  //  if login success
 };
 
 export const fetchUserProfileAction = () => async (dispatch) => {
   const { status, userInfo } = await fetchUserProfile();
+
   if (status === "success") {
+    //mount user in the redux store
+    console.log(userInfo);
     dispatch(setUser(userInfo));
   }
 };

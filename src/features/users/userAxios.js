@@ -1,38 +1,44 @@
 import { apiProcessor } from "../../services/axios";
-
-const userEp = import.meta.env.VITE_APP_SERVER_ROOT + "/api/v1/users";
+const userEP = import.meta.env.VITE_APP_SERVR_ROOT + "/api/v1/users";
 
 export const postNewUser = (data) => {
   const obj = {
-    url: userEp,
+    url: userEP,
     method: "post",
     data,
-    // isPrivate:true
+    // isPrivate: true
   };
+
   return apiProcessor(obj);
 };
+
 export const verifyUserLink = (data) => {
   const obj = {
-    url: userEp + "/user-verification",
+    url: userEP + "/user-verification",
     method: "post",
     data,
   };
+
   return apiProcessor(obj);
 };
+
 export const userLogin = (data) => {
   const obj = {
-    url: userEp + "/login",
+    url: userEP + "/login",
     method: "post",
     data,
     showToast: true,
   };
+
   return apiProcessor(obj);
 };
+
 export const fetchUserProfile = () => {
   const obj = {
-    url: userEp,
+    url: userEP,
     method: "get",
     isPrivate: true,
   };
+
   return apiProcessor(obj);
 };

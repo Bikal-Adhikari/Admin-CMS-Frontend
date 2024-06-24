@@ -1,9 +1,9 @@
-import { Stack } from "react-bootstrap";
+import Stack from "react-bootstrap/Stack";
 import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
   return (
-    <Stack gap={3}>
+    <Stack gap={1}>
       <div className="p-2">
         <Link className="nav-link" to="/admin/dashboard">
           Dashboard
@@ -15,8 +15,8 @@ export const Sidebar = () => {
         </Link>
       </div>
       <div className="p-2">
-        <Link className="nav-link" to="/admin/product">
-          Product
+        <Link className="nav-link" to="/admin/products">
+          Products
         </Link>
       </div>
       <div className="p-2">
@@ -34,7 +34,7 @@ export const Sidebar = () => {
           Reviews
         </Link>
       </div>
-
+      <hr />
       <div className="p-2">
         <Link className="nav-link" to="/admin/admins">
           Admins

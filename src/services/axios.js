@@ -10,7 +10,7 @@ export const apiProcessor = async ({
   url,
   data,
   isPrivate,
-  isRefreshJWT,
+  isRefreshJwt,
   showToast,
 }) => {
   try {
@@ -23,8 +23,6 @@ export const apiProcessor = async ({
       method,
       url,
       data,
-      isPrivate,
-      isRefreshJWT,
       headers,
     });
 
@@ -33,15 +31,17 @@ export const apiProcessor = async ({
       toast.promise(pending, {
         pending: "Please wait...",
       });
-      const response = await pending;
+
+      response = await pending;
+      console.log(response);
       toast[response.data.status](response.data.message);
-      console.log(response.data);
     } else {
       response = await pending;
     }
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
+    showToast && toast.error(error.message);
     return {
       status: "error",
       message: error.message,
