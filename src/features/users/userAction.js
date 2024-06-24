@@ -1,5 +1,10 @@
 import { toast } from "react-toastify";
-import { postNewUser, userLogin, verifyUserLink } from "./userAxios";
+import {
+  fetchUserProfile,
+  postNewUser,
+  userLogin,
+  verifyUserLink,
+} from "./userAxios";
 
 export const apiProcessWithToast = async (obj, func) => {
   const pending = func(obj);
@@ -19,6 +24,17 @@ export const verifyUserLinkAction = async (data) => {
   return apiProcessWithToast(data, verifyUserLink);
 };
 export const loginAdminAction = (data) => async (dispatch) => {
-  const response = await userLogin(data);
-  console.log(response);
+  const { status, tokens } = await userLogin(data);
+  if (status === "success") {
+    sessionStorage.setItem("accessJWT", tokens.accessJWT);
+    localStorage.setItem("refreshJWT", tokens.accessJWT);
+    dispatch( ());
+  }
+};
+
+export const fetchUserProfileAction = () => async (dispatch) => {
+  const { status, userInfo } = await fetchUserProfile();
+  if (status === "success") {
+    console.log(userInfo);
+  }
 };

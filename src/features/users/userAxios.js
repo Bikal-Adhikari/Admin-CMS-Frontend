@@ -28,3 +28,11 @@ export const userLogin = (data) => {
   };
   return apiProcessor(obj);
 };
+export const fetchUserProfile = () => {
+  const obj = {
+    url: userEp,
+    method: "get",
+    isPrivate: true,
+  };
+  return apiProcessor(obj);
+};
