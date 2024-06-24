@@ -1,14 +1,21 @@
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/common/customInput/CustomInput";
 import { toast } from "react-toastify";
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAdminAction } from "../../features/users/userAction";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.userInfo);
+  const redirectTo = "/admin/dashboard";
+  useEffect(() => {
+    user?._id && navigate(redirectTo);
+  }, [user?._id, redirectTo, navigate]);
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const email = emailRef.current.value;

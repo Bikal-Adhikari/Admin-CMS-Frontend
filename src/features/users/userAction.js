@@ -5,6 +5,7 @@ import {
   userLogin,
   verifyUserLink,
 } from "./userAxios";
+import { setUser } from "./userSlice";
 
 export const apiProcessWithToast = async (obj, func) => {
   const pending = func(obj);
@@ -28,13 +29,13 @@ export const loginAdminAction = (data) => async (dispatch) => {
   if (status === "success") {
     sessionStorage.setItem("accessJWT", tokens.accessJWT);
     localStorage.setItem("refreshJWT", tokens.accessJWT);
-    dispatch( ());
+    dispatch(fetchUserProfileAction());
   }
 };
 
 export const fetchUserProfileAction = () => async (dispatch) => {
   const { status, userInfo } = await fetchUserProfile();
   if (status === "success") {
-    console.log(userInfo);
+    dispatch(setUser(userInfo));
   }
 };
