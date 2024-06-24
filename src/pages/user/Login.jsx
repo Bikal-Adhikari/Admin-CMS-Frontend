@@ -1,10 +1,12 @@
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/common/customInput/CustomInput";
-
 import { toast } from "react-toastify";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { loginAdminAction } from "../../features/users/userAction";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const handleOnSubmit = (e) => {
@@ -14,7 +16,7 @@ const Login = () => {
     if (!email || !password) {
       return toast.error("Must have email and password filled");
     }
-    console.log(email, password);
+    dispatch(loginAdminAction({ email, password }));
   };
   const inputs = [
     {

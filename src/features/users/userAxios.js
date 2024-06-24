@@ -19,3 +19,12 @@ export const verifyUserLink = (data) => {
   };
   return apiProcessor(obj);
 };
+export const userLogin = (data) => {
+  const obj = {
+    url: userEp + "/login",
+    method: "post",
+    data,
+    showToast: true,
+  };
+  return apiProcessor(obj);
+};
