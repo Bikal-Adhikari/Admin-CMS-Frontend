@@ -13,7 +13,7 @@ export const AdminLayout = () => {
       </div>
       <div className="right flex-grow-1">
         <Header />
-        <main className="main" style={{ minHeight: "90vh" }}>
+        <main className="main p-2" style={{ minHeight: "90vh" }}>
           <Outlet />
         </main>
         <Footer />
