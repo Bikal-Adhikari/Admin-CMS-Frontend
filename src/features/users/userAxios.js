@@ -63,3 +63,20 @@ export const logoutUser = () => {
 
   return apiProcessor(obj);
 };
+export const requestOTP = () => {
+  const obj = {
+    url: userEP + "/otp",
+    method: "post",
+  };
+
+  return apiProcessor(obj);
+};
+export const resetPassword = (data) => {
+  const obj = {
+    url: userEP + "/password/reset",
+    method: "patch",
+    data,
+  };
+
+  return apiProcessor(obj);
+};

@@ -17,6 +17,7 @@ import { Auth } from "./components/auth/Auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { autoLoginAction } from "./features/users/userAction";
+import ForgetPassword from "./pages/user/ForgetPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
         {/* public routes  */}
         <Route path="/" element={<Login />} />
         <Route path="/verify-user" element={<UserVerification />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
 
         {/* private routes  */}
         <Route

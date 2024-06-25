@@ -1,11 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { Button, Form, Placeholder } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/common/custom-input/CustomInput";
-import useForm from "../../Hooks/useForm";
-import {
-  createNewAdminAction,
-  loginAdminAction,
-} from "../../features/users/userAction";
+
+import { loginAdminAction } from "../../features/users/userAction";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -72,6 +69,10 @@ const Login = () => {
 
           <div className="d-grid mt-3">
             <Button type="submit"> Login Now</Button>
+          </div>
+          <div className="text-end">
+            Forget password ? {""}
+            <a href="/forget-password">Reset Now</a>
           </div>
         </Form>
       </div>
