@@ -52,3 +52,14 @@ export const getNewAccessJWT = () => {
 
   return apiProcessor(obj);
 };
+
+export const logoutUser = () => {
+  const obj = {
+    url: userEP + "/logout",
+    method: "delete",
+    isPrivate: true,
+    showToast: true,
+  };
+
+  return apiProcessor(obj);
+};

@@ -3,8 +3,12 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FaUser } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { logOutUserAction } from "../../features/users/userAction";
 
 export const Header = () => {
+  const dispatch = useDispatch();
+
   return (
     <Navbar expand="md" className="bg-dark " data-bs-theme="dark">
       <Container>
@@ -14,7 +18,12 @@ export const Header = () => {
           <Nav className="ms-auto">
             <NavDropdown title={<FaUser />} id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">Logout</NavDropdown.Item>
+              <NavDropdown.Item
+                href="#"
+                onClick={() => dispatch(logOutUserAction())}
+              >
+                Logout
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

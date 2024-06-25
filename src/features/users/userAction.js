@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import {
   fetchUserProfile,
   getNewAccessJWT,
+  logoutUser,
   postNewUser,
   userLogin,
   verifyUserLink,
@@ -45,7 +46,7 @@ export const fetchUserProfileAction = () => async (dispatch) => {
 
   if (status === "success") {
     //mount user in the redux store
-    console.log(userInfo);
+
     dispatch(setUser(userInfo));
   }
 };
@@ -65,4 +66,14 @@ export const autoLoginAction = () => async (dispatch) => {
       dispatch(fetchUserProfileAction());
     }
   }
+};
+
+export const logOutUserAction = () => async (dispatch) => {
+  // call api with authorization for backend logout
+  logoutUser();
+
+  // frontend logout
+  dispatch(setUser({}));
+  localStorage.removeItem("refreshJWT");
+  sessionStorage.removeItem("accessJWT");
 };
