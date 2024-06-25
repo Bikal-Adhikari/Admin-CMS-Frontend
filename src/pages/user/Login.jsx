@@ -8,21 +8,22 @@ import {
 } from "../../features/users/userAction";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
   const { user } = useSelector((state) => state.userInfo);
 
-  const redirectTo = "/admin/dashboard";
+  const redirectTo = location?.state?.from?.pathname || "/admin/dashboard";
   useEffect(() => {
     user?._id && navigate(redirectTo);
-  }, [user?._id]);
+  }, [user?._id, navigate, redirectTo]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();

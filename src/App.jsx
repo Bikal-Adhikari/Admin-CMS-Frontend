@@ -14,8 +14,15 @@ import Reviews from "./pages/review/Reviews";
 import Admin from "./pages/user/Admin";
 import Orders from "./pages/order/Orders";
 import { Auth } from "./components/auth/Auth";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { autoLoginAction } from "./features/users/userAction";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(autoLoginAction());
+  }, [dispatch]);
   return (
     <div>
       <Routes>

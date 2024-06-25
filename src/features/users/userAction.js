@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import {
   fetchUserProfile,
+  getNewAccessJWT,
   postNewUser,
   userLogin,
   verifyUserLink,
@@ -46,5 +47,22 @@ export const fetchUserProfileAction = () => async (dispatch) => {
     //mount user in the redux store
     console.log(userInfo);
     dispatch(setUser(userInfo));
+  }
+};
+
+export const autoLoginAction = () => async (dispatch) => {
+  const accessJWT = sessionStorage.getItem("accessJWT");
+
+  if (accessJWT) {
+    return dispatch(fetchUserProfileAction());
+  }
+  const refreshJWT = localStorage.getItem("refreshJWT");
+  if (refreshJWT) {
+    // get a new access jwt then call get user method
+    const response = await getNewAccessJWT();
+    if (response.status === "success") {
+      sessionStorage.setItem("accessJWT", response.accessJWT);
+      dispatch(fetchUserProfileAction());
+    }
   }
 };
