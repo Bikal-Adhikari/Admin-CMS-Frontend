@@ -5,6 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { FaUser } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { logOutUserAction } from "../../features/users/userAction";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,14 @@ export const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <NavDropdown title={<FaUser />} id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+              <Link
+                to="admin/profile"
+                style={{ textDecoration: "none", color: "white" }}
+                className="p-3"
+              >
+                Profile
+              </Link>
+              {/* <NavDropdown.Item href="admin/profile">Profile</NavDropdown.Item> */}
               <NavDropdown.Item
                 href="#"
                 onClick={() => dispatch(logOutUserAction())}

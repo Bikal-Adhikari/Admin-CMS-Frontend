@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { autoLoginAction } from "./features/users/userAction";
 import ForgetPassword from "./pages/user/ForgetPassword";
+import EditProfile from "./pages/user/EditProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
           <Route path="admin/new" element={<Register />} />
 
           <Route path="admin/profile" element={<Profile />} />
+          <Route path="admin/profile/edit/:_id" element={<EditProfile />} />
         </Route>
 
         <Route path="*" element={<h1>404 Page not found!</h1>} />
