@@ -2,13 +2,13 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowModal } from "../../../store/systemSlice";
 
-export const CustomModal = ({ title, children, ...rest }) => {
-  const { showModal } = useSelector((state) => state.system);
-  const dispatch = useDispatch();
+export const CustomModal = ({ show, setShow, title, children, ...rest }) => {
+  //   const { showModal } = useSelector((state) => state.system);
+  //   const dispatch = useDispatch();
   return (
     <Modal
-      show={showModal}
-      onHide={() => dispatch(setShowModal(false))}
+      show={show}
+      onHide={() => setShow(false)}
       {...rest}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"

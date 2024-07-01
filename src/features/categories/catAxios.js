@@ -22,3 +22,24 @@ export const getAllCategories = () => {
 
   return apiProcessor(obj);
 };
+export const editCategory = (form) => {
+  const obj = {
+    url: categoryEP + `/:${form._id}`,
+    method: "put",
+    isPrivate: true,
+    showToast: true,
+    data: form,
+  };
+
+  return apiProcessor(obj);
+};
+export const deleteCategory = (_id) => {
+  const obj = {
+    url: categoryEP + `/:${_id}`,
+    method: "delete",
+    isPrivate: true,
+    showToast: true,
+  };
+
+  return apiProcessor(obj);
+};

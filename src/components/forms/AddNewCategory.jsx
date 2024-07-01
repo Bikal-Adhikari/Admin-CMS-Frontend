@@ -4,16 +4,17 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { createNewCategoryAction } from "../../features/categories/catAction";
 
-export const AddNewCategory = () => {
+export const AddNewCategory = ({ setShow }) => {
   const titleRef = useRef("");
   const dispatch = useDispatch();
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = async () => {
     const title = titleRef.current.value;
     if (!title) {
       return alert("Must fill up the form first");
     }
-    dispatch(createNewCategoryAction({ title }));
+    const isSuccess = await dispatch(createNewCategoryAction({ title }));
+    isSuccess && setShow(false);
   };
   const inputs = [
     {
