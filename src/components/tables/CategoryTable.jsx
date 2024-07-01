@@ -20,8 +20,9 @@ export const CategoryTable = () => {
     dispatch(setShowModal(true));
   };
   const handleDelete = (_id) => {
-    window.confirm("Are you sure you want to delete this category");
-    dispatch(deleteCategoryAction(_id));
+    if (window.confirm("Are you sure you want to delete this category")) {
+      dispatch(deleteCategoryAction(_id));
+    }
   };
 
   return (

@@ -20,7 +20,10 @@ export const EditCategory = ({ selectedCat }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(EditCategoryAction(form));
+    const resp = dispatch(EditCategoryAction(form));
+    if (resp) {
+      setShow(false);
+    }
   };
   const inputs = [
     {
@@ -29,15 +32,17 @@ export const EditCategory = ({ selectedCat }) => {
       name: "status",
       type: "text",
       required: true,
+      value: form.status,
       options: [
+        { label: "-- Select --", value: "" },
         {
           value: "active",
-          text: "Active",
+          label: "Active",
           selected: form.status === "active",
         },
         {
           value: "inactive",
-          text: "Inactive",
+          label: "Inactive",
           selected: form.status === "inactive",
         },
       ],

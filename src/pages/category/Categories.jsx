@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { CustomModal } from "../../components/common/custom-modal/CustomModal";
 
 import { useDispatch } from "react-redux";
-import { setShowModal } from "../../store/systemSlice";
+
 import { CategoryTable } from "../../components/tables/CategoryTable";
 import { AddNewCategory } from "../../components/forms/AddNewCategory";
 import { useCustomModal } from "../../Hooks/useCustomModal";
@@ -21,7 +21,7 @@ const Categories = () => {
         </Button>
       </div>
       <CustomModal title="Add New Category" show={show} setShow={setShow}>
-        <AddNewCategory />
+        <AddNewCategory setShow={setShow} />
       </CustomModal>
       <CategoryTable />
     </div>

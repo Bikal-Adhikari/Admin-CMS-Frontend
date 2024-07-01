@@ -27,6 +27,7 @@ export const EditCategoryAction = (form) => async (dispatch) => {
   const { status } = await editCategory(form);
   if (status === "success") {
     dispatch(fetchCategoryAction());
+    return true;
   }
 };
 export const deleteCategoryAction = (_id) => async (dispatch) => {

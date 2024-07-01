@@ -24,7 +24,7 @@ export const getAllCategories = () => {
 };
 export const editCategory = (form) => {
   const obj = {
-    url: categoryEP + `/:${form._id}`,
+    url: `${categoryEP}/${form._id}`,
     method: "put",
     isPrivate: true,
     showToast: true,
@@ -35,7 +35,7 @@ export const editCategory = (form) => {
 };
 export const deleteCategory = (_id) => {
   const obj = {
-    url: categoryEP + `/:${_id}`,
+    url: `${categoryEP}/${_id}`,
     method: "delete",
     isPrivate: true,
     showToast: true,
