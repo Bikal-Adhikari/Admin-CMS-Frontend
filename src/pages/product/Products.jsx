@@ -34,7 +34,7 @@ const Products = () => {
       <h2>Products</h2>
       <hr />
       <div className="text-end">
-        <Link to="admin/products/new">
+        <Link to="/admin/products/new">
           <Button className="btn btn-primary">Add New Product</Button>
         </Link>
       </div>
