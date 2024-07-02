@@ -10,18 +10,18 @@ export const postNewProduct = (data) => {
     isPrivate: true,
     showToast: true,
   };
+  console.log(data);
+  return apiProcessor(obj);
+};
+export const getAllProducts = () => {
+  const obj = {
+    url: productEP,
+    method: "get",
+    isPrivate: true,
+  };
 
   return apiProcessor(obj);
 };
-// export const getAllCategories = () => {
-//   const obj = {
-//     url: categoryEP,
-//     method: "get",
-//     isPrivate: true,
-//   };
-
-//   return apiProcessor(obj);
-// };
 // export const editCategory = (form) => {
 //   const obj = {
 //     url: `${categoryEP}/${form._id}`,

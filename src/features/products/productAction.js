@@ -1,21 +1,22 @@
-import { postNewProduct } from "./productAxios";
+import { getAllProducts, postNewProduct } from "./productAxios";
+import { setProducts } from "./productSlice";
 
 export const createNewProductAction = (productData) => async (dispatch) => {
   const response = await postNewProduct(productData);
 
-  // if (response.status === "success") {
-  //   dispatch(fetchCategoryAction());
-  //   return true;
-  // }
+  if (response.status === "success") {
+    dispatch(fetchProductAction());
+    return true;
+  }
 };
 
-// export const fetchCategoryAction = () => async (dispatch) => {
-//   const { status, categories } = await getAllCategories();
+export const fetchProductAction = () => async (dispatch) => {
+  const { status, products } = await getAllProducts();
 
-//   if (status === "success") {
-//     dispatch(setCategories(categories));
-//   }
-// };
+  if (status === "success") {
+    dispatch(setProducts(products));
+  }
+};
 
 // export const EditCategoryAction = (form) => async (dispatch) => {
 //   const { status } = await editCategory(form);

@@ -1,48 +1,31 @@
-import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import Table from "react-bootstrap/Table";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteCategoryAction,
-  fetchCategoryAction,
-} from "../../features/categories/catAction";
-import { EditCategory } from "../forms/EditCategory";
-import { setShowModal } from "../../store/systemSlice";
-export const ProductTable = () => {
-  const dispatch = useDispatch();
-  const [selectedCat, setSelectedCat] = useState({});
-  useEffect(() => {
-    dispatch(fetchCategoryAction());
-  }, [dispatch]);
-  const { categories } = useSelector((state) => state.category);
-  const handleEdit = (cat) => {
-    setSelectedCat(cat);
-    dispatch(setShowModal(true));
-  };
-  const handleDelete = (_id) => {
-    if (window.confirm("Are you sure you want to delete this category")) {
-      dispatch(deleteCategoryAction(_id));
-    }
-  };
+import { Button, Form, Pagination, Table } from "react-bootstrap";
 
+export const ProductTable = () => {
+  let active = 2;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>
+    );
+  }
   return (
     <div>
-      {selectedCat._id && <EditCategory selectedCat={selectedCat} />}
-
-      <div>{categories.length} Categories found</div>
+      <div className="d-flex justify-content-between my-4 align-items-center">
+        <div>30 Products Found</div>
+        <div>
+          <Form.control />
+        </div>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>Product</th>
-            <th>SKU</th>
+            <th>Status</th>
+            <th>Title</th>
             <th>Slug</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Sales Price</th>
-            <th>Sales Start</th>
-            <th>Sales End</th>
-            <th>DesCription</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +50,13 @@ export const ProductTable = () => {
           ))}
         </tbody>
       </Table>
+      <Pagination>{items}</Pagination>
+      <br />
+
+      <Pagination size="lg">{items}</Pagination>
+      <br />
+
+      <Pagination size="sm">{items}</Pagination>
     </div>
   );
 };
