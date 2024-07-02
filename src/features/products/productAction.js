@@ -1,33 +1,32 @@
-import { getAllProducts, postNewProduct } from "./productAxios";
+import {
+  deleteProduct,
+  editProduct,
+  getAllProducts,
+  postNewProduct,
+} from "./productAxios";
 import { setProducts } from "./productSlice";
 
-export const createNewProductAction = (productData) => async (dispatch) => {
-  const response = await postNewProduct(productData);
+export const createNewProductAction = async (productData) => {
+  await postNewProduct(productData);
+};
+
+export const getProductAction = () => async (dispatch) => {
+  const response = await getAllProducts();
 
   if (response.status === "success") {
-    dispatch(fetchProductAction());
-    return true;
+    dispatch(setProducts(response.products));
   }
 };
 
-export const fetchProductAction = () => async (dispatch) => {
-  const { status, products } = await getAllProducts();
-
+export const editProductAction = (form) => async (dispatch) => {
+  const { status } = await editProduct(form);
   if (status === "success") {
-    dispatch(setProducts(products));
+    dispatch(getProductAction());
   }
 };
-
-// export const EditCategoryAction = (form) => async (dispatch) => {
-//   const { status } = await editCategory(form);
-//   if (status === "success") {
-//     dispatch(fetchCategoryAction());
-//     return true;
-//   }
-// };
-// export const deleteCategoryAction = (_id) => async (dispatch) => {
-//   const { status } = await deleteCategory(_id);
-//   if (status === "success") {
-//     dispatch(fetchCategoryAction());
-//   }
-// };
+export const deleteProductAction = (_id) => async (dispatch) => {
+  const { status } = await deleteProduct(_id);
+  if (status === "success") {
+    dispatch(getProductAction());
+  }
+};

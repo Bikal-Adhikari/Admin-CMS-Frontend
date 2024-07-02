@@ -1,24 +1,19 @@
-import { useEffect } from "react";
-
 import { Button, Form } from "react-bootstrap";
 import useForm from "../../Hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategoryAction } from "../../features/categories/catAction";
-import { Link } from "react-router-dom";
+
+import { Link, useParams } from "react-router-dom";
 import { createNewProductAction } from "../../features/products/productAction";
 import {
   CustomInput,
   CustomSelect,
 } from "../../components/common/custom-input/CustomInput";
 
-const NewProduct = () => {
+const EditProduct = () => {
+  const params = useParams();
   const { form, setForm, handleOnChange } = useForm();
-  const { categories } = useSelector((state) => state.category);
+  const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    !categories.length && dispatch(fetchCategoryAction());
-  }, [dispatch, categories]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -133,4 +128,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default EditProduct;
