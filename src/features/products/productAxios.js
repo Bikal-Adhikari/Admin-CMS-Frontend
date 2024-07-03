@@ -22,6 +22,15 @@ export const getAllProducts = () => {
 
   return apiProcessor(obj);
 };
+export const getAProduct = (_id) => {
+  const obj = {
+    url: `${productEP}/${_id}`,
+    method: "get",
+    isPrivate: true,
+  };
+
+  return apiProcessor(obj);
+};
 export const editProduct = (form) => {
   const obj = {
     url: `${productEP}/${form._id}`,

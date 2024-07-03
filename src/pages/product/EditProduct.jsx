@@ -3,40 +3,59 @@ import useForm from "../../Hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useParams } from "react-router-dom";
-import { createNewProductAction } from "../../features/products/productAction";
+import { editProductAction } from "../../features/products/productAction";
 import {
   CustomInput,
   CustomSelect,
 } from "../../components/common/custom-input/CustomInput";
+import { useEffect } from "react";
+import { fetchCategoryAction } from "../../features/categories/catAction";
 
 const EditProduct = () => {
-  const params = useParams();
+  const { _id } = useParams();
   const { form, setForm, handleOnChange } = useForm();
-  const { products } = useSelector((state) => state.product);
+
+  const { categories } = useSelector((state) => state.category);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    !categories.length && dispatch(fetchCategoryAction());
+  }, [dispatch, categories]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    createNewProductAction(form);
+    dispatch(editProductAction(form));
   };
 
-  const options = categories
-    .filter((p) => p.status === "active")
-    .map(({ title, _id }) => {
-      return { text: title, value: _id };
-    });
-
-  console.log(options);
-
   const inputs = [
+    {
+      isSelectType: true,
+      label: "Status",
+      name: "status",
+      type: "text",
+      required: true,
+      value: form.status,
+      options: [
+        { label: "-- Select --", value: "" },
+        {
+          value: "active",
+          label: "Active",
+          selected: form.status === "active",
+        },
+        {
+          value: "inactive",
+          label: "Inactive",
+          selected: form.status === "inactive",
+        },
+      ],
+    },
     {
       label: "Category ",
       name: "parentCatId",
       type: "text",
       required: true,
       isSelectType: true,
-      options,
     },
     {
       label: "Name",
@@ -51,6 +70,15 @@ const EditProduct = () => {
       type: "text",
       required: true,
       placeholder: "DJK-H9879",
+      disabled: true,
+    },
+    {
+      label: "Slug",
+      name: "slug",
+      type: "text",
+      required: true,
+      placeholder: "",
+      disabled: true,
     },
     {
       label: "Qty",
@@ -108,9 +136,19 @@ const EditProduct = () => {
       <Form onSubmit={handleOnSubmit}>
         {inputs.map((item, i) =>
           item.isSelectType ? (
-            <CustomSelect key={i} {...item} onChange={handleOnChange} />
+            <CustomSelect
+              key={i}
+              {...item}
+              onChange={handleOnChange}
+              value={form[item.name]}
+            />
           ) : (
-            <CustomInput key={i} {...item} onChange={handleOnChange} />
+            <CustomInput
+              key={i}
+              {...item}
+              onChange={handleOnChange}
+              value={form[item.name]}
+            />
           )
         )}
 
