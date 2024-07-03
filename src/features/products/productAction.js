@@ -1,6 +1,7 @@
 import {
   deleteProduct,
   editProduct,
+  getAProduct,
   getAllProducts,
   postNewProduct,
 } from "./productAxios";
@@ -15,6 +16,13 @@ export const getProductAction = () => async (dispatch) => {
 
   if (response.status === "success") {
     dispatch(setProducts(response.products));
+  }
+};
+export const getOneProductAction = async (_id) => {
+  const response = await getAProduct(_id);
+
+  if (response.status === "success") {
+    return response;
   }
 };
 

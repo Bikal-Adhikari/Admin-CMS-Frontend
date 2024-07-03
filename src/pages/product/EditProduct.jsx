@@ -3,7 +3,10 @@ import useForm from "../../Hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useParams } from "react-router-dom";
-import { editProductAction } from "../../features/products/productAction";
+import {
+  editProductAction,
+  getOneProductAction,
+} from "../../features/products/productAction";
 import {
   CustomInput,
   CustomSelect,
@@ -22,12 +25,20 @@ const EditProduct = () => {
     !categories.length && dispatch(fetchCategoryAction());
   }, [dispatch, categories]);
 
+  useEffect(() => {
+    if (_id) {
+      const response = getOneProductAction(_id);
+      setForm(response.product);
+      console.log(response.product);
+    }
+  }, [setForm, _id]);
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
     dispatch(editProductAction(form));
   };
-
+  console.log(form);
   const inputs = [
     {
       isSelectType: true,
