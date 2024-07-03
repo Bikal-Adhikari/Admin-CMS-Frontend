@@ -1,6 +1,9 @@
 import React from "react";
 import { Button, Form, Placeholder } from "react-bootstrap";
-import { CustomInput } from "../../components/common/custom-input/CustomInput";
+import {
+  CustomInput,
+  CustomSelect,
+} from "../../components/common/custom-input/CustomInput";
 import useForm from "../../Hooks/useForm";
 import { createNewAdminAction } from "../../features/users/userAction";
 import { toast } from "react-toastify";
@@ -84,9 +87,13 @@ const Register = () => {
       <div className="" style={{ width: "450px" }}>
         <Form className="shadow-lg p-3 rounded  " onSubmit={handleOnSubmit}>
           <h3>Admin Registration</h3>
-          {inputs.map((item, i) => (
-            <CustomInput key={i} {...item} onChange={handleOnChange} />
-          ))}
+          {inputs.map((item, i) =>
+            item.isSelectType ? (
+              <CustomSelect key={i} {...item} onChange={handleOnChange} />
+            ) : (
+              <CustomInput key={i} {...item} onChange={handleOnChange} />
+            )
+          )}
 
           <div className="d-grid">
             <Button type="submit">Register New Admin</Button>
