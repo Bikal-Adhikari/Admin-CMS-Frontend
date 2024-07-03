@@ -39,6 +39,24 @@ const Register = () => {
       placeholder: "0412345",
     },
     {
+      label: "Gender",
+      name: "gender",
+      type: "text",
+      isSelectType: true,
+      required: true,
+      options: [
+        { label: "-- Select --", value: "" },
+        {
+          value: "male",
+          label: "Male",
+        },
+        {
+          value: "female",
+          label: "Female",
+        },
+      ],
+    },
+    {
       label: "Email",
       name: "email",
       type: "email",
