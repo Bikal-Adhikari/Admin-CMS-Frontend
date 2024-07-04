@@ -1,5 +1,4 @@
-import React from "react";
-import { Button, Form, Placeholder } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import {
   CustomInput,
   CustomSelect,

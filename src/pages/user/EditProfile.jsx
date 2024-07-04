@@ -1,7 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useForm from "../../Hooks/useForm";
 import { CustomInput } from "../../components/common/custom-input/CustomInput";
@@ -14,7 +14,6 @@ const EditProfile = () => {
   const { user } = useSelector((state) => state.userInfo);
   const { form, handleOnChange, setForm } = useForm({ user });
   useEffect(() => {
-    //fetch single book
     if (_id !== form?._id) {
       dispatch(fetchUserProfileAction());
       user?._id && setForm(user);
@@ -82,7 +81,9 @@ const EditProfile = () => {
       {/* form here  */}
 
       <h4 className="py-4">Profile Update</h4>
-
+      <Link to="/admin/profile">
+        <Button variant="secondary">&lt; Back</Button>
+      </Link>
       <Form onSubmit={handleOnSubmit}>
         {inputs?.map((input, i) => (
           <CustomInput

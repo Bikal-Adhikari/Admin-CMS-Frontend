@@ -19,7 +19,19 @@ export const Profile = () => {
     dispatch(fetchUserProfileAction());
   }, [dispatch]);
 
-  const { _id, role, fName, lName, phone, email, ...rest } = user;
+  const {
+    _id,
+    role,
+    fName,
+    lName,
+    phone,
+    email,
+    gender,
+    isEmailVerified,
+    status,
+    ...rest
+  } = user;
+  console.log(isEmailVerified);
   return (
     <section style={{ backgroundColor: "#eee" }}>
       <MDBContainer className="py-5">
@@ -46,6 +58,15 @@ export const Profile = () => {
           <MDBCol lg="8">
             <MDBCard className="mb-4">
               <MDBCardBody>
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Profile Status</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{status}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
                 <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Full Name</MDBCardText>
@@ -81,6 +102,26 @@ export const Profile = () => {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">{phone}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Gender</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{gender}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Verified User</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">
+                      {isEmailVerified ? "Yes" : "No"}
+                    </MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
