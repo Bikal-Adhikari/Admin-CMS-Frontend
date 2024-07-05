@@ -12,6 +12,7 @@ import {
 } from "../../components/common/custom-input/CustomInput";
 import { useEffect } from "react";
 import { fetchCategoryAction } from "../../features/categories/catAction";
+import { formatToDisplayDate } from "../../helpers/dateFormattter";
 
 const initialState = {
   status: "",
@@ -29,10 +30,11 @@ const initialState = {
 
 const EditProduct = () => {
   const { _id } = useParams();
-  console.log(_id);
+
   const { form, setForm, handleOnChange } = useForm(initialState);
 
   const { categories } = useSelector((state) => state.category);
+  const { prod } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,8 +42,11 @@ const EditProduct = () => {
   }, [dispatch, categories]);
 
   useEffect(() => {
-    setForm(getOneProductAction(_id));
-  }, [setForm, _id]);
+    if (_id !== form._id) {
+      dispatch(getOneProductAction(_id));
+      prod?._id && setForm(prod);
+    }
+  }, [_id, dispatch, prod, setForm, form]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -158,6 +163,15 @@ const EditProduct = () => {
               {...item}
               onChange={handleOnChange}
               value={form[item.name]}
+            />
+          ) : item.type === "date" ? (
+            <CustomInput
+              key={i}
+              {...item}
+              onChange={handleOnChange}
+              value={
+                form[item.name] ? formatToDisplayDate(form[item.name]) : ""
+              }
             />
           ) : (
             <CustomInput

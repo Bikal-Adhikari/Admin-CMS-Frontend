@@ -5,7 +5,7 @@ import {
   getAllProducts,
   postNewProduct,
 } from "./productAxios";
-import { setProducts } from "./productSlice";
+import { setProd, setProducts } from "./productSlice";
 
 export const createNewProductAction = async (productData) => {
   await postNewProduct(productData);
@@ -18,11 +18,11 @@ export const getProductAction = () => async (dispatch) => {
     dispatch(setProducts(response.products));
   }
 };
-export const getOneProductAction = async (_id) => {
+export const getOneProductAction = (_id) => async (dispatch) => {
   const response = await getAProduct(_id);
 
   if (response.status === "success") {
-    return response.product;
+    dispatch(setProd(response.product));
   }
 };
 

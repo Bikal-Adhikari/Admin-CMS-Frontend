@@ -67,7 +67,7 @@ export const ProductTable = () => {
                 {prod.salesStart?.slice(0, 10)} To {prod.salesEnd?.slice(0, 10)}
               </td>
               <td>
-                <Link to={"/edit/:" + prod._id}>
+                <Link to={"/admin/products/edit/" + prod._id}>
                   <Button variant="warning">Edit</Button>
                 </Link>
                 <Button variant="danger" onClick={() => handleDelete(prod._id)}>
