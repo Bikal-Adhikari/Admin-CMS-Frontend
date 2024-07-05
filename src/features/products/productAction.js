@@ -22,7 +22,7 @@ export const getOneProductAction = async (_id) => {
   const response = await getAProduct(_id);
 
   if (response.status === "success") {
-    return response;
+    return response.product;
   }
 };
 

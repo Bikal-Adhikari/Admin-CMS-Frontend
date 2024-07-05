@@ -7,6 +7,7 @@ import { deleteProductAction } from "../../features/products/productAction";
 
 export const ProductTable = () => {
   const [displayProd, setDisplayProd] = useState([]);
+
   const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -66,7 +67,7 @@ export const ProductTable = () => {
                 {prod.salesStart?.slice(0, 10)} To {prod.salesEnd?.slice(0, 10)}
               </td>
               <td>
-                <Link to={`/admin/products/edit/${prod._id}`}>
+                <Link to={"/edit/:" + prod._id}>
                   <Button variant="warning">Edit</Button>
                 </Link>
                 <Button variant="danger" onClick={() => handleDelete(prod._id)}>

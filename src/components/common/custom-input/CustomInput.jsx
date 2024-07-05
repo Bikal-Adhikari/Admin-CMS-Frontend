@@ -22,9 +22,8 @@ export const CustomSelect = ({
       {label && <Form.Label>{label}</Form.Label>}
 
       <Form.Select {...rest} ref={forwardRef}>
-        <option value=""> -- Select --</option>
-        {options.map(({ value, text, selected }, i) => (
-          <option key={i} value={value} selected={selected}>
+        {options?.map(({ value, text }, i) => (
+          <option key={i} value={value}>
             {text}
           </option>
         ))}
@@ -32,3 +31,5 @@ export const CustomSelect = ({
     </Form.Group>
   );
 };
+
+export default CustomSelect;

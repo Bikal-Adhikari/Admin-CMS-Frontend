@@ -31,7 +31,7 @@ export const Profile = () => {
     status,
     ...rest
   } = user;
-  console.log(isEmailVerified);
+
   return (
     <section style={{ backgroundColor: "#eee" }}>
       <MDBContainer className="py-5">

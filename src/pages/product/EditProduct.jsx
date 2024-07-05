@@ -1,7 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import useForm from "../../Hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link, useParams } from "react-router-dom";
 import {
   editProductAction,
@@ -14,9 +13,24 @@ import {
 import { useEffect } from "react";
 import { fetchCategoryAction } from "../../features/categories/catAction";
 
+const initialState = {
+  status: "",
+  parentCatId: "",
+  name: "",
+  sku: "",
+  slug: "",
+  qty: 0,
+  price: 0,
+  salesPrice: 0,
+  salesStart: "",
+  salesEnd: "",
+  description: "",
+};
+
 const EditProduct = () => {
   const { _id } = useParams();
-  const { form, setForm, handleOnChange } = useForm();
+  console.log(_id);
+  const { form, setForm, handleOnChange } = useForm(initialState);
 
   const { categories } = useSelector((state) => state.category);
   const dispatch = useDispatch();
@@ -26,11 +40,7 @@ const EditProduct = () => {
   }, [dispatch, categories]);
 
   useEffect(() => {
-    if (_id) {
-      const response = getOneProductAction(_id);
-      setForm(response.product);
-      console.log(response.product);
-    }
+    setForm(getOneProductAction(_id));
   }, [setForm, _id]);
 
   const handleOnSubmit = (e) => {
@@ -38,7 +48,7 @@ const EditProduct = () => {
 
     dispatch(editProductAction(form));
   };
-  console.log(form);
+
   const inputs = [
     {
       isSelectType: true,
@@ -46,19 +56,10 @@ const EditProduct = () => {
       name: "status",
       type: "text",
       required: true,
-      value: form.status,
       options: [
         { label: "-- Select --", value: "" },
-        {
-          value: "active",
-          label: "Active",
-          selected: form.status === "active",
-        },
-        {
-          value: "inactive",
-          label: "Inactive",
-          selected: form.status === "inactive",
-        },
+        { value: "active", text: "Active" },
+        { value: "inactive", text: "Inactive" },
       ],
     },
     {
@@ -67,6 +68,11 @@ const EditProduct = () => {
       type: "text",
       required: true,
       isSelectType: true,
+      options: categories
+        .filter((p) => p.status === "active")
+        .map(({ title, _id }) => {
+          return { text: title, value: _id };
+        }),
     },
     {
       label: "Name",
