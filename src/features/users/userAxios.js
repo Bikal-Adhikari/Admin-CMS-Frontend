@@ -42,6 +42,16 @@ export const fetchUserProfile = () => {
 
   return apiProcessor(obj);
 };
+export const editUserProfile = (userobj) => {
+  const obj = {
+    url: userEP,
+    method: "put",
+    isPrivate: true,
+    data: userobj,
+  };
+
+  return apiProcessor(obj);
+};
 export const getNewAccessJWT = () => {
   const obj = {
     url: userEP + "/new-accessjwt",

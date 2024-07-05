@@ -5,7 +5,10 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useForm from "../../Hooks/useForm";
 import { CustomInput } from "../../components/common/custom-input/CustomInput";
-import { fetchUserProfileAction } from "../../features/users/userAction";
+import {
+  editUserProfileAction,
+  fetchUserProfileAction,
+} from "../../features/users/userAction";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
