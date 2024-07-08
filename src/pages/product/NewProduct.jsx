@@ -12,7 +12,14 @@ import {
 } from "../../components/common/custom-input/CustomInput";
 
 const NewProduct = () => {
-  const { form, setForm, handleOnChange } = useForm();
+  const {
+    form,
+    setForm,
+    handleOnChange,
+    handleOnImgChange,
+    images,
+    setImages,
+  } = useForm();
   const { categories } = useSelector((state) => state.category);
   const dispatch = useDispatch();
 
@@ -22,8 +29,16 @@ const NewProduct = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
-    createNewProductAction(form);
+    // populate the form data
+    const formData = new FormData();
+    for (let key in form) {
+      formData.append(key, form[key]);
+    }
+    // append the images
+    if (images.length > 0) {
+      [...images].forEach((img) => formData.append("images", img));
+    }
+    createNewProductAction(formData);
   };
 
   const options = categories
@@ -126,8 +141,9 @@ const NewProduct = () => {
             type="file"
             name="images"
             required={true}
-            accept="image/jpg, image/png, image/gif"
+            accept="image/jpg, image/png, image/gif, image/jpeg"
             multiple
+            onChange={handleOnImgChange}
           />
         </Form.Group>
 

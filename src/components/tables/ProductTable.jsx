@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteProductAction } from "../../features/products/productAction";
 
+const serverEP = import.meta.env.VITE_APP_SERVR_ROOT;
+
 export const ProductTable = () => {
   const [displayProd, setDisplayProd] = useState([]);
 
@@ -56,7 +58,7 @@ export const ProductTable = () => {
             <tr key={prod._id}>
               <td>{1 + i}</td>
               <td>
-                <img src={prod.thumbnail} width="70px" alt="" />
+                <img src={serverEP + prod.thumbnail} width="70px" alt="" />
               </td>
               <td>{prod.name}</td>
               <td>{prod.price}</td>
