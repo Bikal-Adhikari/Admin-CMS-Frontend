@@ -31,7 +31,8 @@ const initialState = {
 const EditProduct = () => {
   const { _id } = useParams();
 
-  const { form, setForm, handleOnChange } = useForm(initialState);
+  const { form, setForm, handleOnChange, handleOnImgChange, images } =
+    useForm(initialState);
 
   const { categories } = useSelector((state) => state.category);
   const { prod } = useSelector((state) => state.product);
@@ -50,8 +51,16 @@ const EditProduct = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(editProductAction(form));
+    // populate the form data
+    const formData = new FormData();
+    for (let key in form) {
+      formData.append(key, form[key]);
+    }
+    // append the images
+    if (images.length > 0) {
+      [...images].forEach((img) => formData.append("images", img));
+    }
+    dispatch(editProductAction(formData));
   };
 
   const inputs = [
@@ -155,7 +164,7 @@ const EditProduct = () => {
       <Link to="/admin/products">
         <Button variant="secondary">&lt; Back</Button>
       </Link>
-      <Form onSubmit={handleOnSubmit}>
+      <Form onSubmit={handleOnSubmit} encType="multipart/form-data">
         {inputs.map((item, i) =>
           item.isSelectType ? (
             <CustomSelect
@@ -169,7 +178,7 @@ const EditProduct = () => {
               key={i}
               {...item}
               onChange={handleOnChange}
-              value={dateFormatter(form[item.name])}
+              value={form[item.name] ? dateFormatter(form[item.name]) : ""}
             />
           ) : (
             <CustomInput
@@ -184,7 +193,14 @@ const EditProduct = () => {
         <Form.Group>
           <Form.Label>Upload Images</Form.Label>
 
-          <Form.Control type="file" multiple />
+          <Form.Control
+            type="file"
+            name="images"
+            required={true}
+            accept="image/jpg, image/png, image/gif, image/jpeg"
+            multiple
+            onChange={handleOnImgChange}
+          />
         </Form.Group>
 
         <div className="d-grid mt-3">

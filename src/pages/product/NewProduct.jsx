@@ -125,7 +125,7 @@ const NewProduct = () => {
       <Link to="/admin/products">
         <Button variant="secondary">&lt; Back</Button>
       </Link>
-      <Form onSubmit={handleOnSubmit}>
+      <Form onSubmit={handleOnSubmit} encType="multipart/form-data">
         {inputs.map((item, i) =>
           item.isSelectType ? (
             <CustomSelect key={i} {...item} onChange={handleOnChange} />
