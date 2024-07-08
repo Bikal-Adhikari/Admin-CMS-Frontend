@@ -12,6 +12,7 @@ import {
 } from "../../components/common/custom-input/CustomInput";
 import { useEffect } from "react";
 import { fetchCategoryAction } from "../../features/categories/catAction";
+import { dateFormatter } from "../../helpers/dateFormatter";
 
 const initialState = {
   status: "",
@@ -148,7 +149,7 @@ const EditProduct = () => {
 
   return (
     <div>
-      <h2>Create new product</h2>
+      <h2>Edit product</h2>
       <hr />
 
       <Link to="/admin/products">
@@ -168,7 +169,7 @@ const EditProduct = () => {
               key={i}
               {...item}
               onChange={handleOnChange}
-              value={form[item.name].slice(0, 10)}
+              value={dateFormatter(form[item.name])}
             />
           ) : (
             <CustomInput
