@@ -12,7 +12,6 @@ import {
 } from "../../components/common/custom-input/CustomInput";
 import { useEffect } from "react";
 import { fetchCategoryAction } from "../../features/categories/catAction";
-import { formatToDisplayDate } from "../../helpers/dateFormattter";
 
 const initialState = {
   status: "",
@@ -169,9 +168,7 @@ const EditProduct = () => {
               key={i}
               {...item}
               onChange={handleOnChange}
-              value={
-                form[item.name] ? formatToDisplayDate(form[item.name]) : ""
-              }
+              value={form[item.name].slice(0, 10)}
             />
           ) : (
             <CustomInput
