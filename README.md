@@ -5,7 +5,7 @@ Admin CMS Frontend is a responsive web application built for managing content an
 
 ## Demo
 
-Explore the admin CMS frontend online [here](https://your-admin-cms-frontend-url.com/).
+Explore the admin CMS frontend online 
 
 ## Technologies Used
 
